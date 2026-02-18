@@ -1,0 +1,213 @@
+/* Analysis Panel Styles */
+
+.analysis-panel-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* AI Analysis */
+.ai-prediction-card {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 2px solid var(--accent-blue);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.prediction-direction {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 12px 0;
+}
+
+.prediction-direction.UP { color: var(--accent-green); }
+.prediction-direction.DOWN { color: var(--accent-red); }
+.prediction-direction.NEUTRAL { color: var(--text-secondary); }
+
+.confidence-display {
+    font-size: 1.5em;
+    color: var(--accent-blue);
+}
+
+.probability-bars {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.prob-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85em;
+}
+
+.prob-bar-label {
+    width: 60px;
+    text-align: right;
+}
+
+.prob-bar-track {
+    flex: 1;
+    height: 20px;
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.prob-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.prob-bar-fill.up { background: var(--accent-green); }
+.prob-bar-fill.down { background: var(--accent-red); }
+.prob-bar-fill.neutral { background: var(--text-secondary); }
+
+.prob-bar-value {
+    width: 40px;
+    text-align: left;
+}
+
+/* Narrative */
+.narrative-section {
+    background: var(--bg-tertiary);
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-blue);
+}
+
+.narrative-section h4 {
+    color: var(--accent-blue);
+    margin-bottom: 12px;
+    font-size: 0.9em;
+}
+
+.narrative-text {
+    line-height: 1.8;
+    font-size: 0.9em;
+    white-space: pre-wrap;
+}
+
+/* Setup Card */
+.setup-card {
+    background: rgba(72, 187, 120, 0.1);
+    border: 2px solid var(--accent-green);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.setup-card.invalid {
+    background: rgba(113, 128, 150, 0.1);
+    border-color: var(--text-secondary);
+}
+
+.setup-card h4 {
+    color: var(--accent-green);
+    margin-bottom: 12px;
+}
+
+.setup-card.invalid h4 {
+    color: var(--text-secondary);
+}
+
+.setup-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.setup-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.setup-detail-label {
+    font-size: 0.75em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.setup-detail-value {
+    font-size: 1.1em;
+    font-weight: bold;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Explanation */
+.explanation-section {
+    background: var(--bg-tertiary);
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.explanation-section h4 {
+    color: var(--accent-purple);
+    margin-bottom: 12px;
+    font-size: 0.9em;
+}
+
+.explanation-text {
+    font-size: 0.85em;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.explanation-text ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.explanation-text li {
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+}
+
+.explanation-text li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+}
+
+/* Feedback Section */
+.feedback-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.feedback-section h4 {
+    margin-bottom: 12px;
+    font-size: 0.9em;
+}
+
+.feedback-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.feedback-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.feedback-btn:hover {
+    transform: scale(1.05);
+}
+
+.feedback-btn.up { background: var(--accent-green); color: #0a0e14; }
+.feedback-btn.down { background: var(--accent-red); color: #0a0e14; }
+.feedback-btn.neutral { background: var(--text-secondary); color: #0a0e14; }

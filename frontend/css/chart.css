@@ -1,0 +1,84 @@
+/* Chart Specific Styles */
+
+canvas {
+    display: block;
+}
+
+/* Selection Overlay */
+.selection-overlay {
+    position: absolute;
+    background: rgba(99, 179, 237, 0.2);
+    border: 2px solid var(--accent-blue);
+    pointer-events: none;
+}
+
+/* Heatmap Tooltip */
+.heatmap-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.75em;
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* Crosshair */
+.crosshair {
+    position: absolute;
+    pointer-events: none;
+}
+
+.crosshair-line-h {
+    width: 100%;
+    height: 1px;
+    background: var(--accent-blue);
+    opacity: 0.5;
+}
+
+.crosshair-line-v {
+    width: 1px;
+    height: 100%;
+    background: var(--accent-blue);
+    opacity: 0.5;
+}
+
+/* Price Labels */
+.price-label {
+    position: absolute;
+    right: 0;
+    background: var(--bg-tertiary);
+    padding: 2px 6px;
+    font-size: 0.75em;
+    border-radius: 4px;
+}
+
+/* Bar Info on Hover */
+.bar-info {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    min-width: 200px;
+}
+
+.bar-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px 0;
+}
+
+.bar-info-label {
+    color: var(--text-secondary);
+}
+
+.bar-info-value {
+    color: var(--text-primary);
+    font-weight: bold;
+}
+
+.bar-info-value.up { color: var(--accent-green); }
+.bar-info-value.down { color: var(--accent-red); }
