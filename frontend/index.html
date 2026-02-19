@@ -4,99 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Market Analyzer Pro - IA Integrada</title>
+    
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/chart.css">
     <link rel="stylesheet" href="css/analysis-panel.css">
     <link rel="stylesheet" href="css/ai-panel.css">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
 </head>
 <body>
     <div id="app">
-        <!-- Header -->
-        <header class="app-header">
-            <h1>🧠 Market Analyzer Pro</h1>
+        <header class="main-header">
+            <h1>📊 Market Analyzer Pro</h1>
             <div class="controls">
-                <select id="symbol-selector">
+                <select id="symbolSelect">
                     <option value="XAUUSD">XAUUSD</option>
                     <option value="EURUSD">EURUSD</option>
                     <option value="GBPUSD">GBPUSD</option>
                     <option value="BTCUSD">BTCUSD</option>
+                    <option value="USTEC">USTEC</option>
                 </select>
-                <button id="connect-btn">🔌 Conectar</button>
-                <span id="connection-status">Desconectado</span>
+                <button id="clearBtn">Limpar</button>
+                <button id="analyzeBtn">Analisar Regiao</button>
             </div>
         </header>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Chart Area -->
-            <div class="chart-section">
-                <div class="chart-toolbar">
-                    <button id="zoom-in">+</button>
-                    <button id="zoom-out">-</button>
-                    <button id="reset-view">⟲</button>
-                    <span class="toolbar-info">Shift+Click: Selecionar região | Click: Analisar barra</span>
-                </div>
-                <canvas id="main-chart"></canvas>
-                <div class="chart-legend">
-                    <div class="legend-item"><span class="dot high"></span> Alta atenção IA</div>
-                    <div class="legend-item"><span class="dot medium"></span> Média atenção</div>
-                    <div class="legend-item"><span class="dot low"></span> Baixa atenção</div>
+        <div class="main-layout">
+            <div class="chart-container">
+                <canvas id="mainChart"></canvas>
+                <div class="chart-overlay">
+                    <div class="legend">
+                        <span class="legend-item"><span class="color-box buy"></span> Compra</span>
+                        <span class="legend-item"><span class="color-box sell"></span> Venda</span>
+                        <span class="legend-item"><span class="color-box absorption"></span> Absorcao</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Analysis Panel -->
-            <div class="analysis-section">
-                <div class="tabs">
-                    <button class="tab-btn active" data-tab="ai">🧠 IA</button>
-                    <button class="tab-btn" data-tab="execution">⚡ Execução</button>
-                    <button class="tab-btn" data-tab="absorption">🧽 Absorção</button>
-                    <button class="tab-btn" data-tab="route">🛤️ Rota</button>
+            <div class="side-panels">
+                <div class="panel">
+                    <h3>📈 Analise em Tempo Real</h3>
+                    <div id="marketPanel" class="panel-content">
+                        <div class="empty-state">Aguardando dados...</div>
+                    </div>
                 </div>
 
-                <div id="ai-tab" class="tab-content active">
-                    <div id="ai-analysis-content">
-                        <div class="placeholder">
-                            <p>Clique em uma barra ou selecione uma região para análise da IA</p>
-                            <button onclick="window.requestTestAnalysis()">🧪 Testar Análise</button>
+                <div class="panel">
+                    <h3>🤖 Analise da IA</h3>
+                    <div id="aiPanel" class="panel-content">
+                        <div class="empty-state">
+                            Shift+Click: Selecionar regiao<br>
+                            Click: Analisar barra
                         </div>
                     </div>
                 </div>
 
-                <div id="execution-tab" class="tab-content">
-                    <div id="execution-content">
-                        <p class="placeholder-text">Aguardando dados...</p>
-                    </div>
-                </div>
-
-                <div id="absorption-tab" class="tab-content">
-                    <div id="absorption-content">
-                        <p class="placeholder-text">Aguardando dados...</p>
-                    </div>
-                </div>
-
-                <div id="route-tab" class="tab-content">
-                    <div id="route-content">
-                        <p class="placeholder-text">Selecione uma barra para ver a rota</p>
+                <div class="panel">
+                    <h3>🛤️ Analise de Rota</h3>
+                    <div id="routePanel" class="panel-content">
+                        <div class="empty-state">Selecione uma barra para ver a rota</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Status Bar -->
         <footer class="status-bar">
-            <span id="last-tick">Aguardando ticks...</span>
-            <span id="ai-status">IA: Pronta</span>
+            <span id="connectionStatus">🟡 Conectando...</span>
+            <span id="tickCount">Ticks: 0</span>
+            <span id="clusterCount">Clusters: 0</span>
         </footer>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/websocket.js"></script>
+    <!-- ORDEM CRITICA: WebSocket PRIMEIRO -->
+    <script src="js/analysis/websocket.js"></script>
     <script src="js/chart/AtemporalChart.js"></script>
     <script src="js/chart/RegionSelector.js"></script>
+    <script src="js/chart/VolumeProfile.js"></script>
+    <script src="js/ai/AIOrchestrator.js"></script>
+    <script src="js/ai/AttentionVisualizer.js"></script>
     <script src="js/analysis/AIAnalysisView.js"></script>
-    <script src="js/analysis/ExecutionView.js"></script>
-    <script src="js/analysis/AbsorptionView.js"></script>
-    <script src="js/analysis/RouteView.js"></script>
+    <script src="js/analysis/MarketAnalysisPanel.js"></script>
+    <script src="js/analysis/RegionAnalysisView.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

@@ -332,7 +332,7 @@ async def mt5_poll_loop():
                     }
                     
                     # Atualiza orchestrator
-                    if orchestrstrator:
+                    if orchestrator:
                         orchestrator.update_data(tick_data)
                         analysis = orchestrator.analyze_current()
                         
@@ -436,7 +436,7 @@ async def simulation_loop():
 # ==========================================
 # HTTP SERVER
 # ==========================================
-def start_http_server(port=8000):
+def start_http_server(port=8001):
     base = os.path.dirname(os.path.abspath(__file__))
     
     # Procura frontend
@@ -482,8 +482,8 @@ async def main():
     http_thread.start()
     
     # WebSocket
-    logger.info(f"📡 WebSocket: ws://localhost:8765")
-    server = await websockets.serve(handle_client, "localhost", 8765)
+    logger.info(f"📡 WebSocket: ws://localhost:8766")
+    server = await websockets.serve(handle_client, "localhost", 8766)
     
     # Loops
     await asyncio.gather(
